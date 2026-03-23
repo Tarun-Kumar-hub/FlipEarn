@@ -9,12 +9,13 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
+
+// ✅ FIRST: allow inngest (PUBLIC)
+app.use("/api/inngest", serve({ client: inngest, functions }));
+
+// ✅ THEN: protect other routes
 app.use(clerkMiddleware());
 
 app.get("/", (req, res) => res.send("Server is live!"));
 
-// Inngest route
-app.use("/api/inngest", serve({ client: inngest, functions }));
-
-// ✅ IMPORTANT: export handler (instead of app.listen)
 export default app;
