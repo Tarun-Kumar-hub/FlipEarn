@@ -13,9 +13,8 @@ app.use(clerkMiddleware());
 
 app.get("/", (req, res) => res.send("Server is live!"));
 
-// Set up the "/api/inngest" (recommended) routes with the serve handler
+// Inngest route
 app.use("/api/inngest", serve({ client: inngest, functions }));
 
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// ✅ IMPORTANT: export handler (instead of app.listen)
+export default app;
